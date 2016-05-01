@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "ava",
-    "corpus:build": "./tasks/build-from-wit-corpus.sh"
+    "mkdir:data": "mkdir -p ./data",
+    "corpus:build:wit": "./tasks/build-corpus-from-wit-app.sh",
+    "corpus:build:luis": "./tasks/build-corpus-from-luis-export.sh",
+    "corpus:merge": "./tasks/merge-corpus-wit-luis.sh"
   },
   "repository": {
     "type": "git",
