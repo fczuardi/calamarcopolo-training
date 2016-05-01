@@ -1,0 +1,26 @@
+{
+  "name": "calamarcopolo-training",
+  "version": "0.1.0",
+  "description": "Utterances, statements, expressions and other possibly useful data for training a chatbot in Portuguese for bus schedule related queries",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava",
+    "corpus:build": "./tasks/build-from-wit-corpus.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fczuardi/calamarcopolo-training.git"
+  },
+  "keywords": [
+    "chatbot",
+    "chatbot-training",
+    "pt-br",
+    "bus-schedule"
+  ],
+  "author": "Fabricio C Zuardi",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/fczuardi/calamarcopolo-training/issues"
+  },
+  "homepage": "https://github.com/fczuardi/calamarcopolo-training#readme"
+}
