@@ -3,8 +3,13 @@
   "version": "0.1.0",
   "description": "Utterances, statements, expressions and other possibly useful data for training a chatbot in Portuguese for bus schedule related queries",
   "main": "index.js",
+  "scripts-info": {
+    "corpus:build:wit": "get the corpus statements from a wit app",
+    "corpus:merge": "merge all corpus into one"
+  },
   "scripts": {
     "test": "ava",
+    "info": "npm-scripts-info",
     "mkdir:data": "mkdir -p ./data",
     "corpus:build:wit": "./tasks/build-corpus-from-wit-app.sh",
     "corpus:build:luis": "./tasks/build-corpus-from-luis-export.sh",
@@ -25,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/fczuardi/calamarcopolo-training/issues"
   },
-  "homepage": "https://github.com/fczuardi/calamarcopolo-training#readme"
+  "homepage": "https://github.com/fczuardi/calamarcopolo-training#readme",
+  "devDependencies": {
+    "npm-scripts-info": "^0.3.6"
+  }
 }
