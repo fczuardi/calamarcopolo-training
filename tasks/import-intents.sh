@@ -7,11 +7,16 @@ intentsDir=$1
 # Global var to store the id of the last created intent-entity
 createdEntityID=""
 
+# global vars to keep track of the progress
+intentsCount=0
+intentExpressionsCount=0
+totalExpressionsCount=0
+
 function createEntity {
     # debugSufix="_Q"
     # entityName="$1$debugSufix"
     entityName="$1"
-
+    echo "entityName: $entityName"
     creationPayload='{
         "doc":"'"$entityName"'",
         "id":"'"$entityName"'",
@@ -24,11 +29,12 @@ function createEntity {
     -H "Content-Type: application/json" \
     -d "$creationPayload" | jq -r '.id'
     )
-    echo "createdEntityID $createdEntityID"
+    intentsCount=$((intentsCount+1))
+    echo "createdEntityID [$intentsCount]: $createdEntityID"
 }
 
 function addExpressionToTraitValue {
-    echo "addExpressionToTraitValue $1, $2"
+    echo "addExpressionToTraitValue [$intentExpressionsCount, $totalExpressionsCount] $createdEntityID $1, $2"
     curl 'https://api.wit.ai/sync' -X PUT \
     -H "Authorization: Bearer $WIT_BROWSER_TOKEN" \
     -H 'Content-Type: application/json' \
@@ -52,6 +58,8 @@ function addExpressionToTraitValue {
         },
         "type":"added-semantic"
     }]' --compressed
+    intentExpressionsCount=$((intentExpressionsCount+1))
+    totalExpressionsCount=$((totalExpressionsCount+1))
 }
 
 # change IFS so for loops don't separate use spaces as separators
@@ -63,6 +71,7 @@ for intentFolderName in $(ls "$intentsDir"); do
     for expressionsFileName in $(ls "$intentPath"); do
         traitValue=$(basename "$expressionsFileName" .json)
         expressionsFile="$intentPath/$expressionsFileName";
+        intentExpressionsCount=0
         for query in $(jq -r '.[]' "$expressionsFile"); do
             addExpressionToTraitValue "$traitValue" "$query"
             # debug, just the first string
