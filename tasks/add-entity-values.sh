@@ -10,7 +10,7 @@ function addEntityValue {
     -H "Authorization: Bearer $WIT_TOKEN" \
     -H 'Content-Type: application/json' \
     -d '{ "value":"'"$entityValue"'" }' \
-    --connect-timeout 10
+    --connect-timeout 30 --retry 3 --retry-delay 5
 }
 
 # change IFS so for loops don't separate use spaces as separators
